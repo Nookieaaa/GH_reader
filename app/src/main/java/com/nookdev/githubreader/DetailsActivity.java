@@ -12,20 +12,29 @@ import android.view.MenuItem;
 
 public class DetailsActivity extends AppCompatActivity implements PersonalInfoFragment.PersonalInfoFragmentCallbacks{
     private Profile profile;
+    private PersonalInfoFragment personalInfoFragment;
+    private RepoListFragment repoListFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setLogo(R.drawable.ab_icon);
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 
+        personalInfoFragment = new PersonalInfoFragment();
+        repoListFragment = new RepoListFragment();
+
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        //ft.add();
+        ft.replace(R.id.personalinfo_fragment,personalInfoFragment);
+        ft.replace(R.id.repolist_fragment,repoListFragment);
+        ft.commit();
+
 
     }
 
