@@ -4,6 +4,7 @@ package com.nookdev.githubreader;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -170,6 +171,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onPostExecute(Profile profile) {
         Toast.makeText(this,"Готово",Toast.LENGTH_SHORT).show();
         dismissProgressDialog();
+
+        Intent intent = new Intent(this,DetailsActivity.class);
+        intent.putExtra(Profile.PROFILE_TAG,profile);
+        startActivity(intent);
     }
 
 

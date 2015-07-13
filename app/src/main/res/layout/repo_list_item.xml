@@ -1,6 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/repolist.row"
+    android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/repolist.row.infoblock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:layout_weight="60">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="name"
+            android:id="@+id/repolist.row.infoblock.name" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/repolist.row.infoblock.name"
+            android:text="language"
+            android:id="@+id/repolist.row.infoblock.language" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/repolist.row.starsection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="40">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="number of forks"
+            android:id="@+id/repolist.row.starsection.forks"
+            android:layout_centerVertical="true" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/repolist.row.starsection.forkimage"
+            android:layout_toRightOf="@id/repolist.row.starsection.forks"
+            android:src="@android:drawable/ic_menu_directions" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="number of stars"
+            android:id="@+id/repolist.row.starsection.stars"
+            android:layout_toRightOf="@id/repolist.row.starsection.forkimage"
+            android:layout_centerVertical="true" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/repolist.row.starsection.starimage"
+            android:layout_toRightOf="@id/repolist.row.starsection.stars"
+            android:src="@android:drawable/btn_star_big_off" />
+    </RelativeLayout>
 
 </LinearLayout>

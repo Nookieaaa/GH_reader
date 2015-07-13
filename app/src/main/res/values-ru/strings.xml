@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Github Reader</string>
+    <string name="action_settings">Настройки</string>
+    <string name="api_rate_limit_error">Превышен лимит запросов к API. Попробуйте позже</string>
+    <string name="details_followers">Последователи</string>
+    <string name="details_following">Подписок</string>
+    <string name="details_username">Имя пользователя</string>
+    <string name="hello_world"></string>
+    <string name="progress_dialog_message">Загрузка данных профиля</string>
+    <string name="progress_dialog_wait_message">Пожалуйста подождите...</string>
+    <string name="repository_list_header_label">Репозитории</string>
+    <string name="repository_list_language"></string>
+    <string name="search_button_text">Хочу узнать больше!</string>
+    <string name="username_hint">Имя пользователя GitHub</string>
+    <string name="welcome_text">Введите имя пользователя, что бы узнать больше</string>
+</resources>
