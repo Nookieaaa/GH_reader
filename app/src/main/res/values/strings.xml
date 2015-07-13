@@ -12,6 +12,11 @@
     <string name="api_rate_limit_error">API rate limit exceeded. Try again later.</string>
 
     <!-- detail activity-->
+    <string name="repository_list_header_label">Repositories</string>
+    <string name="repository_list_language">Language</string>
+    <string name="details_username">Username</string>
+    <string name="details_followers">followers</string>
+    <string name="details_following">following</string>
 
 
 </resources>
