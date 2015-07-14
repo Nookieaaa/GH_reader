@@ -1,4 +1,4 @@
-package com.nookdev.githubreader;
+package com.nookdev.githubreader.Models;
 
 
 import android.net.Uri;
@@ -9,15 +9,9 @@ import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GHUser;
 
 import java.io.IOException;
-import java.sql.Array;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 
 public class Profile implements Parcelable{
@@ -149,36 +143,7 @@ public class Profile implements Parcelable{
     }
 
 
-    private class Repository {
 
-        public String name;
-        public int forks;
-        public int stars;
-        public String language;
-
-        public Repository(String _name, String _language, int _forks, int _stars) {
-            this.name = _name;
-            this.language = _language;
-            this.forks = _forks;
-            this.stars = _stars;
-        }
-
-        public String parcelize(){
-            StringBuilder sb = new StringBuilder();
-            return sb.append(addSplitters(PARCEL_REPO_START_TAG)).
-                    append(PARCEL_REPO_NAME_TAG).append(PARCEL_REPO_SPLITTER).append(this.name)
-                    .append(addSplitters(PARCEL_REPO_LANGUAGE_TAG)).append(this.language)
-                    .append(addSplitters(PARCEL_REPO_FORK_TAG)).append(Integer.toString(this.forks))
-                    .append(addSplitters(PARCEL_REPO_STARS_TAG)).append(Integer.toString(this.stars))
-                    .toString();
-        }
-
-        private String addSplitters(String param){
-
-            return PARCEL_REPO_SPLITTER+param+PARCEL_REPO_SPLITTER;
-        }
-
-    }
 
 
 }

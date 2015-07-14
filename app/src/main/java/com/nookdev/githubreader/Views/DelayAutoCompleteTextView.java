@@ -1,4 +1,4 @@
-package com.nookdev.githubreader;
+package com.nookdev.githubreader.Views;
 
 import android.content.Context;
 import android.os.Handler;

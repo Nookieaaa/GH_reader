@@ -1,4 +1,4 @@
-package com.nookdev.githubreader;
+package com.nookdev.githubreader.Utils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,6 +24,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Shader;
 import android.widget.ImageView;
+
+import com.nookdev.githubreader.R;
 
 public class ImageLoader {
 

@@ -1,4 +1,4 @@
-package com.nookdev.githubreader;
+package com.nookdev.githubreader.Fragments;
 
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import java.util.ArrayList;

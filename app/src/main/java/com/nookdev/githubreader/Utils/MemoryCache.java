@@ -1,4 +1,4 @@
-package com.nookdev.githubreader;
+package com.nookdev.githubreader.Utils;
 
 import java.lang.ref.SoftReference;
 import java.util.Collections;

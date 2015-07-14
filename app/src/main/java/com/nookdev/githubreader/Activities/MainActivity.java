@@ -1,4 +1,4 @@
-package com.nookdev.githubreader;
+package com.nookdev.githubreader.Activities;
 
 
 import android.app.FragmentManager;
@@ -16,10 +16,16 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.nookdev.githubreader.Adapters.AutoCompleteAdapter;
+import com.nookdev.githubreader.Fragments.RetainFragment;
+import com.nookdev.githubreader.Models.Profile;
+import com.nookdev.githubreader.R;
+import com.nookdev.githubreader.Views.DelayAutoCompleteTextView;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,RetainFragment.TaskCallbacks {
 
-    private com.nookdev.githubreader.DelayAutoCompleteTextView searchField;
+    private DelayAutoCompleteTextView searchField;
     private boolean hideActionButtons = true;
     private ProgressDialog progressDialog;
 
@@ -57,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (mRetainFragment.isExecuting())
                 showProgressDialog();
 
-        searchField = (com.nookdev.githubreader.DelayAutoCompleteTextView)findViewById(R.id.username);
+        searchField = (DelayAutoCompleteTextView)findViewById(R.id.username);
         searchField.setThreshold(AUTOCOMPLITE_THRESHOLD);
         searchField.setAdapter(new AutoCompleteAdapter(this));
         searchField.setLoadingIndicator((ProgressBar) findViewById(R.id.progress_bar));

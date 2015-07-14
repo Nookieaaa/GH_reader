@@ -1,4 +1,4 @@
-package com.nookdev.githubreader;
+package com.nookdev.githubreader.Utils;
 
 import java.io.InputStream;
 import java.io.InputStream;

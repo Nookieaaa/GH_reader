@@ -1,18 +1,18 @@
-package com.nookdev.githubreader;
+package com.nookdev.githubreader.Fragments;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.text.Format;
+import com.nookdev.githubreader.Utils.ImageLoader;
+import com.nookdev.githubreader.Models.Profile;
+import com.nookdev.githubreader.R;
 
 
 public class PersonalInfoFragment extends Fragment {

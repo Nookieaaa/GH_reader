@@ -1,4 +1,4 @@
-package com.nookdev.githubreader;
+package com.nookdev.githubreader.Adapters;
 
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -11,6 +11,8 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.nookdev.githubreader.R;
 
 import org.kohsuke.github.GHSearchBuilder;
 import org.kohsuke.github.GHUser;

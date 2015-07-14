@@ -1,10 +1,12 @@
-package com.nookdev.githubreader;
+package com.nookdev.githubreader.Fragments;
 
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
 
+
+import com.nookdev.githubreader.Models.Profile;
 
 import org.kohsuke.github.GHUser;
 import org.kohsuke.github.GitHub;
@@ -19,7 +21,7 @@ import java.util.ArrayList;
 public class RetainFragment extends Fragment{
 
 
-    interface TaskCallbacks {
+    public interface TaskCallbacks {
         void onPreExecute();
         void onProgressUpdate(int value);
         void onCancelled();
@@ -78,7 +80,7 @@ public class RetainFragment extends Fragment{
 
 
         @Override
-        protected void onPreExecute() {
+        public void onPreExecute() {
             super.onPreExecute();
             if (mCallbacks != null) {
                 mCallbacks.onPreExecute();
@@ -120,21 +122,21 @@ public class RetainFragment extends Fragment{
         }
 
         @Override
-        protected void onProgressUpdate(Integer... values) {
+        public void onProgressUpdate(Integer... values) {
             if (mCallbacks != null) {
                 mCallbacks.onProgressUpdate(values[0]);
             }
         }
 
         @Override
-        protected void onCancelled() {
+        public void onCancelled() {
             if (mCallbacks != null) {
                 mCallbacks.onCancelled();
             }
         }
 
         @Override
-        protected void onPostExecute(Profile profile) {
+        public void onPostExecute(Profile profile) {
             super.onPostExecute(profile);
             if (mCallbacks != null) {
                 mCallbacks.onPostExecute(profile);

@@ -1,4 +1,4 @@
-package com.nookdev.githubreader;
+package com.nookdev.githubreader.Views;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -25,6 +25,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
+import com.nookdev.githubreader.R;
 
 public class CircleLayout extends ViewGroup {
 

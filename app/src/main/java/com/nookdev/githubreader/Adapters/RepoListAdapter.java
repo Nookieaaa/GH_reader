@@ -1,4 +1,4 @@
-package com.nookdev.githubreader;
+package com.nookdev.githubreader.Adapters;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -9,6 +9,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.nookdev.githubreader.Fragments.SwipeRefreshListFragment;
+import com.nookdev.githubreader.Models.Profile;
+import com.nookdev.githubreader.R;
 
 import java.util.ArrayList;
 

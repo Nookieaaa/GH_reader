@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp">
 
-        <com.nookdev.githubreader.DelayAutoCompleteTextView
+        <com.nookdev.githubreader.Views.DelayAutoCompleteTextView
             android:inputType="textCapSentences"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
