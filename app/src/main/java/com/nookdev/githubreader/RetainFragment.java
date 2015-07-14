@@ -91,8 +91,8 @@ public class RetainFragment extends Fragment{
             String query = params[0];
             try {
                 //TODO добавить авторизацию и убрать свой логин
-                GitHub gitHub = GitHub.connectUsingPassword("nookieaaa","nookie1");
-                //GitHub.connectAnonymously();
+
+                GitHub gitHub=GitHub.connectAnonymously();
 
 
                 try {
