@@ -11,9 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+
 public class SwipeRefreshListFragment extends ListFragment {
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
+    public ArrayList<Profile> CustomListViewValuesArr = new ArrayList<Profile>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,6 +61,10 @@ public class SwipeRefreshListFragment extends ListFragment {
         return mSwipeRefreshLayout;
     }
 
+    public void onItemClick(int mPosition) {
+        Profile profile = CustomListViewValuesArr.get(mPosition);
+    }
+
     private class ListFragmentSwipeRefreshLayout extends SwipeRefreshLayout {
 
         public ListFragmentSwipeRefreshLayout(Context context) {
@@ -72,6 +79,25 @@ public class SwipeRefreshListFragment extends ListFragment {
             } else {
                 return false;
             }
+        }
+
+        /****** Function to set data in ArrayList *************/
+        public void setListData()
+        {
+
+            for (int i = 0; i < 11; i++) {
+
+//                final Profile sched = new Profile();
+//
+//                /******* Firstly take data in model object ******/
+//                sched.setCompanyName("Company "+i);
+//                sched.setImage("image"+i);
+//                sched.setUrl("http:\\www."+i+".com");
+//
+//                /******** Take Model Object in ArrayList **********/
+//                CustomListViewValuesArr.add( sched );
+            }
+
         }
 
     }

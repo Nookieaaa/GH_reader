@@ -113,4 +113,9 @@ public class RepoListFragment extends SwipeRefreshListFragment {
 
     }
 
+    //adapter
+
+
+
+
 }

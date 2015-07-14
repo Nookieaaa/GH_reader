@@ -7,20 +7,23 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.Format;
 
-/**
- * A placeholder fragment containing a simple view.
- */
+
 public class PersonalInfoFragment extends Fragment {
 
     PersonalInfoFragmentCallbacks mCallbacks;
-    private TextView login;
-    private TextView company;
+    private TextView usernaneCompany;
     private TextView followers;
-    private TextView followed;
-    private TextView avatarUri;
+    private TextView following;
+    private ImageButton browseButton;
+    private ImageButton shareButton;
+    private ImageButton saveButton;
 
     public interface PersonalInfoFragmentCallbacks{
         void personalInfoFragmentCallbackAction(String action);
@@ -33,21 +36,32 @@ public class PersonalInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_details, container, false);
-        login = (TextView)rootView.findViewById(R.id.pinfo_username);
-        company = (TextView)rootView.findViewById(R.id.pinfo_company);
-        followed = (TextView)rootView.findViewById(R.id.pinfo_followed);
-        followers = (TextView)rootView.findViewById(R.id.pinfo_followers);
-        avatarUri = (TextView)rootView.findViewById(R.id.pinfo_avatar);
+
+        following = (TextView)rootView.findViewById(R.id.circle_text_following);
+        followers = (TextView)rootView.findViewById(R.id.circle_text_followers);
+        usernaneCompany = (TextView)rootView.findViewById(R.id.circle_text_username_company);
+
 
         Profile profile = getActivity().getIntent().getParcelableExtra(Profile.PROFILE_TAG);
 
-        if (profile!=null) {
-            login.setText("login:" + profile.username);
-            company.setText("company:"+profile.company);
-            followed.setText("following:"+String.valueOf(profile.following));
-            followers.setText("followers:"+String.valueOf(profile.followers));
-            avatarUri.setText("avatar:"+profile.avatarURI.toString());
-        }
+        following.setText(String.format(getString(R.string.details_following),String.valueOf(profile.following)));
+        followers.setText(String.format(getString(R.string.details_followers),String.valueOf(profile.followers)));
+        usernaneCompany.setText(String.format(getString(R.string.details_username_company),profile.username,profile.company));
+
+
+        int loader = R.drawable.notification_template_icon_bg;
+
+        // Imageview to show
+        ImageView image = (ImageView) rootView.findViewById(R.id.avatar);
+
+        // Image url
+        String image_url = profile.avatarURI.toString();
+
+        // ImageLoader class instance
+        ImageLoader imgLoader = new ImageLoader(getActivity().getApplicationContext());
+
+
+        imgLoader.DisplayImage(image_url, loader, image);
 
         return rootView;
     }

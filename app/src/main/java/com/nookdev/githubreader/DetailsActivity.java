@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 
 public class DetailsActivity extends AppCompatActivity implements PersonalInfoFragment.PersonalInfoFragmentCallbacks{
@@ -25,6 +27,8 @@ public class DetailsActivity extends AppCompatActivity implements PersonalInfoFr
         actionBar.setLogo(R.drawable.ab_icon);
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
+
+
 
         personalInfoFragment = new PersonalInfoFragment();
         repoListFragment = new RepoListFragment();

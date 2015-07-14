@@ -15,10 +15,11 @@
     <string name="repository_list_header_label">Repositories</string>
     <string name="repository_list_language">Language : %s</string>
     <string name="details_username">Username</string>
-    <string name="details_followers">followers</string>
-    <string name="details_following">following</string>
+    <string name="details_followers">%s\nfollowers</string>
+    <string name="details_following">%s\nfollowing</string>
     <string name="title_activity_details" translatable="false">Github Reader</string>
     <string name="hello_world" translatable="false">Hello world!</string>
+    <string name="details_username_company" translatable="false">%s : %s</string>
 
 
 </resources>
