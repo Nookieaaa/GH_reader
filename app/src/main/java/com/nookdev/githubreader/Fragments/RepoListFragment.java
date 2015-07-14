@@ -10,6 +10,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
+
+import com.nookdev.githubreader.Adapters.RepoListAdapter;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -40,7 +43,7 @@ public class RepoListFragment extends SwipeRefreshListFragment {
                 // TODO add data
 
 
-        setListAdapter(adapter);
+        setListAdapter(new RepoListAdapter(getActivity(),null));
 
         setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -74,11 +77,11 @@ public class RepoListFragment extends SwipeRefreshListFragment {
 
     private void onRefreshComplete(List<String> result) {
 
-        ArrayAdapter<String> adapter = (ArrayAdapter<String>) getListAdapter();
+        /*ArrayAdapter<String> adapter = (ArrayAdapter<String>) getListAdapter();
         adapter.clear();
         for (String cheese : result) {
             adapter.add(cheese);
-        }
+        }*/
 
 
         setRefreshing(false);

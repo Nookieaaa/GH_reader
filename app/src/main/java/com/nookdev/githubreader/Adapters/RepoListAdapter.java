@@ -2,6 +2,7 @@ package com.nookdev.githubreader.Adapters;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.nookdev.githubreader.Fragments.SwipeRefreshListFragment;
 import com.nookdev.githubreader.Models.Profile;
+import com.nookdev.githubreader.Models.Repository;
 import com.nookdev.githubreader.R;
 
 import java.util.ArrayList;
@@ -19,37 +21,39 @@ import java.util.ArrayList;
 public class RepoListAdapter extends BaseAdapter implements View.OnClickListener {
 
     /*********** Declare Used Variables *********/
-    private SwipeRefreshListFragment activity;
+    private FragmentActivity listFragment;
     private ArrayList data;
-    private static LayoutInflater inflater=null;
+    private static LayoutInflater inflater;
     public Resources res;
-    Profile profile=null;
+    Repository repository;
     int i=0;
 
     /*************  CustomAdapter Constructor *****************/
-    public RepoListAdapter(SwipeRefreshListFragment a, ArrayList d, Resources resLocal) {
+    public RepoListAdapter(FragmentActivity _context, ArrayList _data) {
 
         /********** Take passed values **********/
-        activity = a;
-        data=d;
-        res = resLocal;
+        listFragment = _context;
+        if (_data==null) {
+            _data = new ArrayList();
+            _data.add(new Repository("repo","Java",0,0));
+            _data.add(new Repository("repo1","C++",1,3));
+        }
+        data=_data;
+        //res = resLocal;
 
         /***********  Layout inflator to call external xml layout () ***********/
-        inflater = ( LayoutInflater )activity.getActivity().
+        inflater = ( LayoutInflater )listFragment.getApplicationContext().
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
     }
 
     /******** What is the size of Passed Arraylist Size ************/
     public int getCount() {
-
-        if(data.size()<=0)
-            return 1;
         return data.size();
     }
 
     public Object getItem(int position) {
-        return position;
+        return data.get(position);
     }
 
     public long getItemId(int position) {
@@ -59,9 +63,10 @@ public class RepoListAdapter extends BaseAdapter implements View.OnClickListener
     /********* Create a holder Class to contain inflated xml file elements *********/
     public static class ViewHolder{
 
-        public TextView text;
-        public TextView text1;
-        public TextView textWide;
+        public TextView name;
+        public TextView language;
+        public TextView stars_count;
+        public TextView forks_count;
         public ImageView image;
 
     }
@@ -69,42 +74,48 @@ public class RepoListAdapter extends BaseAdapter implements View.OnClickListener
     /****** Depends upon data size called for each row , Create each ListView row *****/
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        View vi = convertView;
+        View v = convertView;
         ViewHolder holder;
 
         if(convertView==null){
 
             /****** Inflate tabitem.xml file for each row ( Defined below ) *******/
-            vi = inflater.inflate(R.layout.repo_list_item, null);
+            v = inflater.inflate(R.layout.repo_list_item, null);
 
             /****** View Holder Object to contain tabitem.xml file elements ******/
 
             holder = new ViewHolder();
-            holder.text = (TextView) vi.findViewById(R.id.repolist_row_infoblock_name);
-            holder.text1=(TextView)vi.findViewById(R.id.repolist_row_infoblock_language);
-            holder.image=(ImageView)vi.findViewById(R.id.image);
+            holder.name = (TextView) v.findViewById(R.id.repolist_row_infoblock_name);
+            holder.language=(TextView)v.findViewById(R.id.repolist_row_infoblock_language);
+            holder.forks_count=(TextView)v.findViewById(R.id.repolist_row_starsection_forks);
+            holder.stars_count=(TextView)v.findViewById(R.id.repolist_row_starsection_stars);
+            //holder.image=(ImageView)v.findViewById(R.id.image);
 
             /************  Set holder with LayoutInflater ************/
-            vi.setTag( holder );
+            v.setTag( holder );
         }
         else
-            holder=(ViewHolder)vi.getTag();
+            holder=(ViewHolder)v.getTag();
 
         if(data.size()<=0)
         {
-            holder.text.setText("No Data");
+
 
         }
         else
         {
             /***** Get each Model object from Arraylist ********/
-            profile=null;
-            profile = ( Profile ) data.get( position );
+            repository = ( Repository ) data.get( position );
 
             /************  Set Model values in Holder elements ***********/
 
-            holder.text.setText( profile.company );
-            holder.text1.setText( profile.username );
+            holder.name.setText( repository.name );
+            holder.language.setText(String.format(listFragment.getApplicationContext().getString(R.string.repository_list_language), repository.language));
+            holder.stars_count.setText(String.valueOf(repository.stars));
+            holder.forks_count.setText(String.valueOf(repository.forks));
+
+
+
             /*holder.image.setImageResource(
                     res.getIdentifier(
                             "com.androidexample.customlistview:drawable/"+tempValues.getImage()
@@ -112,9 +123,9 @@ public class RepoListAdapter extends BaseAdapter implements View.OnClickListener
 
             /******** Set Item Click Listner for LayoutInflater for each row *******/
 
-            vi.setOnClickListener(new OnItemClickListener( position ));
+            v.setOnClickListener(new OnItemClickListener( position ));
         }
-        return vi;
+        return v;
     }
 
     @Override
@@ -134,11 +145,11 @@ public class RepoListAdapter extends BaseAdapter implements View.OnClickListener
         public void onClick(View arg0) {
 
 
-            SwipeRefreshListFragment sct = activity;
+            FragmentActivity sct = listFragment;
 
             /****  Call  onItemClick Method inside CustomListViewAndroidExample Class ( See Below )****/
 
-            sct.onItemClick(mPosition);
+           // sct.onItemClick(mPosition);
         }
     }
 }

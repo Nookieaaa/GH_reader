@@ -11,16 +11,16 @@
 
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="name"
             android:id="@+id/repolist.row.infoblock.name" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/repolist.row.infoblock.name"
-            android:text="language"
+            android:text="@string/repository_list_language"
             android:id="@+id/repolist.row.infoblock.language" />
     </RelativeLayout>
 
@@ -29,36 +29,54 @@
         android:id="@+id/repolist.row.starsection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="40">
+        android:layout_weight="40"
+        android:focusable="false">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="number of forks"
             android:id="@+id/repolist.row.starsection.forks"
+            android:layout_alignParentTop="false"
+            android:layout_toLeftOf="@+id/repolist.row.starsection.forkimage"
+            android:layout_toStartOf="@+id/repolist.row.starsection.forkimage"
+            android:gravity="fill_horizontal|center_vertical|fill_vertical"
+            android:elegantTextHeight="true"
             android:layout_centerVertical="true" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/repolist.row.starsection.forkimage"
-            android:layout_toRightOf="@id/repolist.row.starsection.forks"
-            android:src="@android:drawable/ic_menu_directions" />
+            android:src="@android:drawable/ic_menu_directions"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/repolist.row.starsection.stars"
+            android:layout_toStartOf="@+id/repolist.row.starsection.stars"
+            android:focusable="true"
+            android:clickable="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="number of stars"
             android:id="@+id/repolist.row.starsection.stars"
-            android:layout_toRightOf="@id/repolist.row.starsection.forkimage"
+            android:layout_alignParentTop="false"
+            android:layout_toLeftOf="@+id/repolist.row.starsection.starimage"
+            android:layout_toStartOf="@+id/repolist.row.starsection.starimage"
+            android:gravity="fill_horizontal|center_vertical|fill_vertical"
+            android:elegantTextHeight="true"
             android:layout_centerVertical="true" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/repolist.row.starsection.starimage"
-            android:layout_toRightOf="@id/repolist.row.starsection.stars"
-            android:src="@android:drawable/btn_star_big_off" />
+            android:src="@android:drawable/btn_star_big_off"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:focusable="true"
+            android:clickable="true" />
     </RelativeLayout>
 
 </LinearLayout>

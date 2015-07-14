@@ -14,6 +14,7 @@
     <!-- detail activity-->
     <string name="repository_list_header_label">Repositories</string>
     <string name="repository_list_language">Language : %s</string>
+    <string name="repository_list_name" translatable="false">name</string>
     <string name="details_username">Username</string>
     <string name="details_followers">%s\nfollowers</string>
     <string name="details_following">%s\nfollowing</string>
