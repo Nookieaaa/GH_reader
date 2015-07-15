@@ -15,6 +15,8 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.nookdev.githubreader.Adapters.RepoListAdapter;
+import com.nookdev.githubreader.Models.Profile;
+import com.nookdev.githubreader.Models.Repository;
 import com.nookdev.githubreader.R;
 
 import java.util.ArrayList;
@@ -22,8 +24,9 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class RepoListFragment extends SwipeRefreshListFragment {
+public class RepoListFragment extends SwipeRefreshListFragment implements RetainFragment.RepoTaskCallbacks {
     View mheaderView;
+    private ArrayList<Repository> data;
 
     @Override
     public void onAttach(Activity activity) {
@@ -33,8 +36,11 @@ public class RepoListFragment extends SwipeRefreshListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setHasOptionsMenu(true);
+        Profile profile = getActivity().getIntent().getParcelableExtra(Profile.PROFILE_TAG);
+        if (profile!=null){
+            data = (ArrayList)profile.repositories;
+        }
     }
 
     @Override
@@ -60,7 +66,7 @@ public class RepoListFragment extends SwipeRefreshListFragment {
         lv.setDividerHeight(10);
         //lv.setBackgroundDrawable(getResources().getDrawable(R.drawable.listview_borders));
 
-        setListAdapter(new RepoListAdapter(getActivity(),null));
+        setListAdapter(new RepoListAdapter(getActivity(),data));
 
         setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -104,6 +110,10 @@ public class RepoListFragment extends SwipeRefreshListFragment {
         setRefreshing(false);
     }
 
+    @Override
+    public void onPostExecute(ArrayList data) {
+
+    }
 
 
     private class DummyBackgroundTask extends AsyncTask<Void, Void, List<String>> {

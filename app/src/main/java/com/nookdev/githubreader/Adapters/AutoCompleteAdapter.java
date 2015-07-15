@@ -65,7 +65,6 @@ public class AutoCompleteAdapter extends BaseAdapter implements Filterable{
         }
         String login = getItem(position);
         ((TextView) convertView.findViewById(android.R.id.text1)).setText(login);
-        //((TextView) convertView.findViewById(R.id.text2)).setText(book.getAuthor());
 
         return convertView;
     }
@@ -121,10 +120,10 @@ public class AutoCompleteAdapter extends BaseAdapter implements Filterable{
             }
             GHSearchBuilder<GHUser> ghUserGHSearchBuilder = gitHubConnetcion.searchUsers().q(query).in("login");
 
-            if (ghUserGHSearchBuilder.list().getTotalCount()==1 &&
-                    ghUserGHSearchBuilder.list().asSet().contains(query)){
-                return null;
-            }
+            if (ghUserGHSearchBuilder.list().getTotalCount()==1)
+                   if(ghUserGHSearchBuilder.list().asList().get(0).getLogin().length() == query.length()){
+                        return null;
+                    }
 
             AbstractList ghUserList = (AbstractList) ghUserGHSearchBuilder.list()
                     .asList()
@@ -163,96 +162,3 @@ public class AutoCompleteAdapter extends BaseAdapter implements Filterable{
     }
 }
 
-
-/*
-public class AutoCompleteAdapter extends ArrayAdapter<String> {
-    private Filter mFilter;
-    private ArrayList<String> mSubData = new ArrayList<String>();
-    static int counter =0;
-
-    public AutoCompleteAdapter(final Context context, int resource) {
-        super(context, resource);
-        mFilter = new Filter() {
-            private int c = ++counter;
-            private ArrayList<String> mData = new ArrayList<String>();
-
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-
-                mData.clear();
-                FilterResults filterResults = new FilterResults();
-
-                if(constraint != null) {
-                    try {
-
-                        Thread t = new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    GitHub gitHub = GitHub.connectAnonymously();
-
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-
-                            }
-                        });
-                           */
-/* // Here is the method (synchronous) that fetches the data
-                            // from the server
-                            URL url = new URL("...");
-                            URLConnection conn = url.openConnection();
-                            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                            String line = "";
-
-                            while ((line = rd.readLine()) != null) {
-                                mData.add(new MyObject(line));
-                            }*//*
-
-
-                    }
-                    catch(Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    filterResults.values = mData;
-                    filterResults.count = mData.size();
-                }
-                return filterResults;
-            }
-
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                if(c == counter) {
-                    mSubData.clear();
-                    if(results != null && results.count > 0) {
-                        ArrayList<String> objects = (ArrayList<String>)results.values;
-                        for (String v : objects)
-                            mSubData.add(v);
-
-                        notifyDataSetChanged();
-                    }
-                    else {
-                        notifyDataSetInvalidated();
-                    }
-                }
-            }
-        };
-    }
-
-    @Override
-    public int getCount() {
-        return mSubData.size();
-    }
-
-    @Override
-    public String getItem(int index) {
-        return mSubData.get(index);
-    }
-
-    @Override
-    public Filter getFilter() {
-        return mFilter;
-    }
-
-}*/

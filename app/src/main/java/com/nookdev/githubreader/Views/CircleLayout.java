@@ -263,7 +263,7 @@ public class CircleLayout extends ViewGroup {
         final float minDimen = width > height ? height : width;
         final float radius = (minDimen - mInnerRadius)/2f;
 
-        changeAvatarParams((int) radius);
+        changeAvatarParams((int) mInnerRadius);
 
         mBounds.set(width / 2 - minDimen / 2, height / 2 - minDimen / 2, width / 2 + minDimen / 2, height / 2 + minDimen / 2);
 
@@ -657,7 +657,9 @@ public class CircleLayout extends ViewGroup {
         drawInnerCircle(canvas, halfWidth, halfHeight);
 
         if(mCachedCanvas != null) {
-            sCanvas.drawBitmap(mDrawingCache, 0f, 0f, null);
+            if (sCanvas != null) {
+                sCanvas.drawBitmap(mDrawingCache, 0f, 0f, null);
+            }
             mDirtyViews.clear();
             mCached = true;
         }
@@ -669,7 +671,7 @@ public class CircleLayout extends ViewGroup {
 
     private void changeAvatarParams(int radius){
         if (circleCallbacks!=null){
-            circleCallbacks.changeAvatarParams(mInnerRadius);
+            circleCallbacks.changeAvatarParams(radius);
         }
 
     }

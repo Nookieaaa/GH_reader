@@ -72,9 +72,17 @@ public class Profile implements Parcelable{
                     )
             );
         }
-        //TODO delete this before release
-        /*String rep = wrapReposToParcel();
-        List<Repository> repository = unpackReposFromParcel(rep);*/
+    }
+
+    public Profile(String _name, String _company, int _followers, int _following, String _avatar){
+        this.username = _name;
+        this.company = _company;
+        this.followers = _followers;
+        this.following = _following;
+
+        if(_avatar!=null){
+            avatarURI = Uri.parse(_avatar);
+        }
     }
 
     public Profile(Parcel parcel) {
@@ -89,6 +97,8 @@ public class Profile implements Parcelable{
 
         this.repositories = unpackReposFromParcel(data[5]);
     }
+
+
 
 
     @Override

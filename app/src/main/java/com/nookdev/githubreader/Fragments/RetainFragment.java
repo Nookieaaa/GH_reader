@@ -1,12 +1,17 @@
 package com.nookdev.githubreader.Fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
 
 
+import com.nookdev.githubreader.Activities.DetailsActivity;
+import com.nookdev.githubreader.Activities.MainActivity;
+import com.nookdev.githubreader.Database.Database;
 import com.nookdev.githubreader.Models.Profile;
+import com.nookdev.githubreader.Models.Repository;
 
 import org.kohsuke.github.GHUser;
 import org.kohsuke.github.GitHub;
@@ -25,11 +30,15 @@ public class RetainFragment extends Fragment{
         void onPreExecute();
         void onProgressUpdate(int value);
         void onCancelled();
-        void onPostExecute(Profile profile);
-
-
+        void onPostExecute(Intent intent);
     }
-    private TaskCallbacks mCallbacks;
+
+    public interface RepoTaskCallbacks{
+        void onPostExecute(ArrayList data);
+    }
+
+    private TaskCallbacks mainActivityCallbacks;
+    private TaskCallbacks detailsActivityCallbacks;
     private FetchProfileTask fetchProfileTask;
 
 
@@ -42,7 +51,12 @@ public class RetainFragment extends Fragment{
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        mCallbacks = (TaskCallbacks) activity;
+        if (activity.getClass() == MainActivity.class) {
+            mainActivityCallbacks = (TaskCallbacks) activity;
+        }
+        else
+            detailsActivityCallbacks = (TaskCallbacks) activity;
+
     }
 
 
@@ -50,7 +64,6 @@ public class RetainFragment extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-        //fetchProfileTask.execute();
     }
 
     public void cancelTask(){
@@ -71,37 +84,38 @@ public class RetainFragment extends Fragment{
     @Override
     public void onDetach() {
         super.onDetach();
-        mCallbacks = null;
+        mainActivityCallbacks = null;
+        detailsActivityCallbacks = null;
     }
 
 
-    public class FetchProfileTask extends AsyncTask<String,Integer,Profile>{
-
-
-
+    public class FetchProfileTask extends AsyncTask<String,Integer,Intent>{
         @Override
         public void onPreExecute() {
             super.onPreExecute();
-            if (mCallbacks != null) {
-                mCallbacks.onPreExecute();
+            if (mainActivityCallbacks != null) {
+                mainActivityCallbacks.onPreExecute();
             }
 
         }
 
         @Override
-        protected Profile doInBackground(String... params) {
+        protected Intent doInBackground(String... params) {
             String query = params[0];
             try {
                 //TODO добавить авторизацию и убрать свой логин
 
-                GitHub gitHub=GitHub.connectUsingPassword("nookieaaa","nookie1");
-                //GitHub.connectAnonymously();
+                GitHub gitHub = GitHub.connectAnonymously();
 
 
                 try {
                     GHUser ghUser = gitHub.getUser(query);
                     Profile profile = new Profile(ghUser);
-                    return profile;
+
+                    Intent findingIntent = new Intent(getActivity(), DetailsActivity.class);
+                    findingIntent.putExtra(Profile.PROFILE_TAG,profile);
+
+                    return findingIntent;
                 }
                 catch (FileNotFoundException e){
 
@@ -124,30 +138,91 @@ public class RetainFragment extends Fragment{
 
         @Override
         public void onProgressUpdate(Integer... values) {
-            if (mCallbacks != null) {
-                mCallbacks.onProgressUpdate(values[0]);
+            if (mainActivityCallbacks != null) {
+                mainActivityCallbacks.onProgressUpdate(values[0]);
             }
         }
 
         @Override
         public void onCancelled() {
-            if (mCallbacks != null) {
-                mCallbacks.onCancelled();
+            if (mainActivityCallbacks != null) {
+                mainActivityCallbacks.onCancelled();
             }
         }
 
         @Override
-        public void onPostExecute(Profile profile) {
-            super.onPostExecute(profile);
-            if (mCallbacks != null) {
-                mCallbacks.onPostExecute(profile);
+        public void onPostExecute(Intent intent) {
+            super.onPostExecute(intent);
+            if (mainActivityCallbacks != null) {
+                mainActivityCallbacks.onPostExecute(intent);
             }
         }
 
 
         }
 
+    public class LoadTask extends AsyncTask<String,Integer,Profile>{
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            if (detailsActivityCallbacks != null) {
+                detailsActivityCallbacks.onPreExecute();
+            }
+        }
 
+        @Override
+        protected void onPostExecute(Profile profile) {
+            super.onPostExecute(profile);
+            if (detailsActivityCallbacks != null) {
+                //detailsActivityCallbacks.onPostExecute(profile);
+            }
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... i) {
+            super.onProgressUpdate(i[0]);
+            if (detailsActivityCallbacks != null) {
+                detailsActivityCallbacks.onProgressUpdate(i[0]);
+            }
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+        }
+
+        @Override
+        protected Profile doInBackground(String... params) {
+
+            String query = params[0];
+
+            return null;
+
+        }
+    }
+
+
+    public class RepoUpdater extends AsyncTask<String,Void,ArrayList<Repository>>{
+
+        @Override
+        protected ArrayList<Repository> doInBackground(String... params) {
+            String query = params[0];
+
+            try {
+                GitHub gitHub = GitHub.connectAnonymously();
+                GHUser user = gitHub.getUser(query);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<Repository> repositories) {
+            super.onPostExecute(repositories);
+
+        }
+    }
 
     }
 

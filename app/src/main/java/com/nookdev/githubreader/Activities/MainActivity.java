@@ -174,12 +174,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onPostExecute(Profile profile) {
+    public void onPostExecute(Intent intent) {
         Toast.makeText(this,"Готово",Toast.LENGTH_SHORT).show();
         dismissProgressDialog();
 
-        Intent intent = new Intent(this,DetailsActivity.class);
-        intent.putExtra(Profile.PROFILE_TAG,profile);
         startActivity(intent);
     }
 

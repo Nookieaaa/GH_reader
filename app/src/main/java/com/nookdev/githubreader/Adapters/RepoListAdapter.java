@@ -34,19 +34,8 @@ public class RepoListAdapter extends BaseAdapter implements View.OnClickListener
         /********** Take passed values **********/
         listFragment = _context;
         if (_data==null) {
-            _data = new ArrayList();
-            _data.add(new Repository("repo","Java",0,0));
-            _data.add(new Repository("repo1","C++",1,3));
-            _data.add(new Repository("repo","Java",0,0));
-            _data.add(new Repository("repo1","C++",1,3));
-            _data.add(new Repository("repo","Java",0,0));
-            _data.add(new Repository("repo1","C++",1,3));
-            _data.add(new Repository("repo","Java",0,0));
-            _data.add(new Repository("repo1","C++",1,3));
-            _data.add(new Repository("repo","Java",0,0));
-            _data.add(new Repository("repo1","C++",1,3));
-            _data.add(new Repository("repo","Java",0,0));
-            _data.add(new Repository("repo1","C++",1,3));
+            _data = new ArrayList<Repository>();
+
         }
         data=_data;
         //res = resLocal;
@@ -77,7 +66,6 @@ public class RepoListAdapter extends BaseAdapter implements View.OnClickListener
         public TextView language;
         public TextView stars_count;
         public TextView forks_count;
-        public ImageView image;
 
     }
 

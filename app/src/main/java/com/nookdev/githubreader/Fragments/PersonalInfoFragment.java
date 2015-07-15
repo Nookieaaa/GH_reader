@@ -18,18 +18,15 @@ import com.nookdev.githubreader.Views.CircleLayout;
 
 public class PersonalInfoFragment extends Fragment {
 
-    PersonalInfoFragmentCallbacks mCallbacks;
     private TextView usernaneCompany;
     private TextView followers;
     private TextView following;
     private ImageButton browseButton;
     private ImageButton shareButton;
     private ImageButton saveButton;
+    private Profile profile;
 
 
-    public interface PersonalInfoFragmentCallbacks{
-        void personalInfoFragmentCallbackAction(String action);
-    }
 
     public PersonalInfoFragment() {
     }
@@ -44,7 +41,7 @@ public class PersonalInfoFragment extends Fragment {
         usernaneCompany = (TextView)rootView.findViewById(R.id.circle_text_username_company);
 
 
-        Profile profile = getActivity().getIntent().getParcelableExtra(Profile.PROFILE_TAG);
+        profile = getActivity().getIntent().getParcelableExtra(Profile.PROFILE_TAG);
 
         following.setText(String.format(getString(R.string.details_following),String.valueOf(profile.following)));
         followers.setText(String.format(getString(R.string.details_followers),String.valueOf(profile.followers)));
@@ -68,27 +65,18 @@ public class PersonalInfoFragment extends Fragment {
         return rootView;
     }
 
-    //interface callback
-    public void personalInfoFragmentCallbackAction(String action){
-        mCallbacks.personalInfoFragmentCallbackAction("some action");
+    public Profile getProfile(){
+        return profile;
     }
+
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        if (mCallbacks!=null) {
-            try {
-                mCallbacks = (PersonalInfoFragmentCallbacks) activity;
-            } catch (ClassCastException e) {
-                throw new ClassCastException(activity.toString()
-                        + " must implement PersonalInfoFragmentCallbacks");
-            }
-        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mCallbacks = null;
     }
 }
