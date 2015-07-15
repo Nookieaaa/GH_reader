@@ -10,9 +10,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nookdev.githubreader.R;
 import com.nookdev.githubreader.Utils.ImageLoader;
 import com.nookdev.githubreader.Models.Profile;
-import com.nookdev.githubreader.R;
+import com.nookdev.githubreader.Views.CircleLayout;
 
 
 public class PersonalInfoFragment extends Fragment {
@@ -24,6 +25,7 @@ public class PersonalInfoFragment extends Fragment {
     private ImageButton browseButton;
     private ImageButton shareButton;
     private ImageButton saveButton;
+
 
     public interface PersonalInfoFragmentCallbacks{
         void personalInfoFragmentCallbackAction(String action);

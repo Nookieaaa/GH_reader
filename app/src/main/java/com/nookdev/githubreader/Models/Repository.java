@@ -19,12 +19,23 @@ public class Repository {
     public int forks;
     public int stars;
     public String language;
+    public boolean forked;
+    public boolean starred;
 
     public Repository(String _name, String _language, int _forks, int _stars) {
         this.name = _name;
         this.language = _language;
         this.forks = _forks;
         this.stars = _stars;
+    }
+
+    public Repository(String _name, String _language, int _forks, int _stars, boolean _forked,boolean _starred) {
+        this.name = _name;
+        this.language = _language;
+        this.forks = _forks;
+        this.stars = _stars;
+        this.starred = _starred;
+        this.forked = _forked;
     }
 
     public String parcelize(){

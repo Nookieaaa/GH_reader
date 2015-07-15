@@ -1,6 +1,7 @@
 package com.nookdev.githubreader.Activities;
 
 
+import android.media.Image;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
@@ -8,14 +9,16 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import com.nookdev.githubreader.Fragments.PersonalInfoFragment;
 import com.nookdev.githubreader.Fragments.RepoListFragment;
 import com.nookdev.githubreader.Models.Profile;
 import com.nookdev.githubreader.R;
+import com.nookdev.githubreader.Views.CircleLayout;
 
 
-public class DetailsActivity extends AppCompatActivity implements PersonalInfoFragment.PersonalInfoFragmentCallbacks{
+public class DetailsActivity extends AppCompatActivity implements PersonalInfoFragment.PersonalInfoFragmentCallbacks,CircleLayout.CircleCallbacks{
     private Profile profile;
     private PersonalInfoFragment personalInfoFragment;
     private RepoListFragment repoListFragment;
@@ -71,5 +74,13 @@ public class DetailsActivity extends AppCompatActivity implements PersonalInfoFr
     @Override
     public void personalInfoFragmentCallbackAction(String action) {
 
+    }
+
+    @Override
+    public void changeAvatarParams(int radius) {
+        ImageView iv = (ImageView)findViewById(R.id.avatar);
+        iv.getLayoutParams().height = (int)(radius*3.5);
+        iv.getLayoutParams().width = (int)(radius*3.5);
+        iv.requestLayout();
     }
 }

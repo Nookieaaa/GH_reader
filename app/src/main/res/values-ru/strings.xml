@@ -9,9 +9,10 @@
     <string name="hello_world"></string>
     <string name="progress_dialog_message">Загрузка данных профиля</string>
     <string name="progress_dialog_wait_message">Пожалуйста подождите...</string>
-    <string name="repository_list_header_label">Репозитории</string>
+    <string name="repository_list_header_label">Репозитории:</string>
     <string name="repository_list_language">Язык : %s</string>
     <string name="search_button_text">Хочу узнать больше!</string>
     <string name="username_hint">Имя пользователя GitHub</string>
     <string name="welcome_text">Введите имя пользователя, чтобы узнать больше</string>
+    <string name="repolist_header">Репозитории:</string>
 </resources>

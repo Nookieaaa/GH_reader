@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/repolist.row"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp"
+    android:background="@drawable/listview_borders"
+    >
 
     <RelativeLayout
         android:id="@+id/repolist.row.infoblock"
@@ -42,7 +46,8 @@
             android:layout_toStartOf="@+id/repolist.row.starsection.forkimage"
             android:gravity="fill_horizontal|center_vertical|fill_vertical"
             android:elegantTextHeight="true"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"
+            />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -53,7 +58,8 @@
             android:layout_toLeftOf="@+id/repolist.row.starsection.stars"
             android:layout_toStartOf="@+id/repolist.row.starsection.stars"
             android:focusable="true"
-            android:clickable="true" />
+            android:clickable="true"
+            style="?android:attr/borderlessButtonStyle"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -76,7 +82,9 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:focusable="true"
-            android:clickable="true" />
+            android:clickable="true"
+            style="?android:attr/borderlessButtonStyle"
+            />
     </RelativeLayout>
 
 </LinearLayout>

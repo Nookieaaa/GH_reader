@@ -37,6 +37,16 @@ public class RepoListAdapter extends BaseAdapter implements View.OnClickListener
             _data = new ArrayList();
             _data.add(new Repository("repo","Java",0,0));
             _data.add(new Repository("repo1","C++",1,3));
+            _data.add(new Repository("repo","Java",0,0));
+            _data.add(new Repository("repo1","C++",1,3));
+            _data.add(new Repository("repo","Java",0,0));
+            _data.add(new Repository("repo1","C++",1,3));
+            _data.add(new Repository("repo","Java",0,0));
+            _data.add(new Repository("repo1","C++",1,3));
+            _data.add(new Repository("repo","Java",0,0));
+            _data.add(new Repository("repo1","C++",1,3));
+            _data.add(new Repository("repo","Java",0,0));
+            _data.add(new Repository("repo1","C++",1,3));
         }
         data=_data;
         //res = resLocal;

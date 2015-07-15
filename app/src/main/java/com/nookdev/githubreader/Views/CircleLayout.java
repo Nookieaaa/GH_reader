@@ -19,17 +19,20 @@ import android.graphics.Xfermode;
 import android.graphics.Region.Op;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.nookdev.githubreader.R;
 
 public class CircleLayout extends ViewGroup {
 
+    private CircleCallbacks circleCallbacks;
     public static final int LAYOUT_NORMAL = 1;
 
     private int mLayoutMode = LAYOUT_NORMAL;
@@ -40,7 +43,7 @@ public class CircleLayout extends ViewGroup {
     private float mAngleRange;
 
     private float mDividerWidth;
-    private int mInnerRadius;
+    public int mInnerRadius;
 
     private Paint mDividerPaint;
     private Paint mCirclePaint;
@@ -60,6 +63,19 @@ public class CircleLayout extends ViewGroup {
     private Canvas mCachedCanvas;
     private Set<View> mDirtyViews = new HashSet<View>();
     private boolean mCached = false;
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        circleCallbacks = null;
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        circleCallbacks = (CircleCallbacks)getContext();
+
+    }
 
     public CircleLayout(Context context) {
         this(context, null);
@@ -247,9 +263,12 @@ public class CircleLayout extends ViewGroup {
         final float minDimen = width > height ? height : width;
         final float radius = (minDimen - mInnerRadius)/2f;
 
-        mBounds.set(width/2 - minDimen/2, height/2 - minDimen/2, width/2 + minDimen/2, height/2 + minDimen/2);
+        changeAvatarParams((int) radius);
+
+        mBounds.set(width / 2 - minDimen / 2, height / 2 - minDimen / 2, width / 2 + minDimen / 2, height / 2 + minDimen / 2);
 
         float startAngle = mAngleOffset;
+
 
         for(int i=0; i<childs; i++) {
             final View child = getChildAt(i);
@@ -322,12 +341,12 @@ public class CircleLayout extends ViewGroup {
                             break;
                         }
                         case R.id.circle_text_following:{
-                            x = (int) (radius * Math.cos(Math.toRadians(centerAngle))*0.8) + width / 2;
+                            x = (int) (radius * Math.cos(Math.toRadians(centerAngle))*0.9) + width / 2;
                             y = (int) (radius * Math.sin(Math.toRadians(centerAngle))*0.8) + height / 2;
                             break;
                         }
                         case R.id.circle_text_followers:{
-                            x = (int) (radius * Math.cos(Math.toRadians(centerAngle))*0.8) + width / 2;
+                            x = (int) (radius * Math.cos(Math.toRadians(centerAngle))*0.9) + width / 2;
                             y = (int) (radius * Math.sin(Math.toRadians(centerAngle))*0.8) + height / 2;
                             break;
                         }
@@ -642,6 +661,17 @@ public class CircleLayout extends ViewGroup {
             mDirtyViews.clear();
             mCached = true;
         }
+    }
+
+    public interface CircleCallbacks{
+        void changeAvatarParams(int radius);
+    }
+
+    private void changeAvatarParams(int radius){
+        if (circleCallbacks!=null){
+            circleCallbacks.changeAvatarParams(mInnerRadius);
+        }
+
     }
 
     public static class LayoutParams extends ViewGroup.LayoutParams {

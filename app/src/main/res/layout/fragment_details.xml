@@ -10,19 +10,23 @@ android:layout_height="match_parent" >
 
     <ImageButton
         android:id="@+id/circle.button.save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:scaleType="fitXY"
         android:text="save"
         android:src="@mipmap/save"
-        android:focusable="true"/>
+        android:focusable="true"
+        style="?android:attr/borderlessButtonStyle"/>
 
     <ImageButton
         android:id="@+id/circle.button.browse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
         android:text="browse"
         android:src="@mipmap/browse"
-        android:focusable="true"/>
+        android:focusable="true"
+        android:scaleType="fitXY"
+        style="?android:attr/borderlessButtonStyle"/>
 
     <TextView
         android:id="@+id/circle.text.followers"
@@ -57,11 +61,13 @@ android:layout_height="match_parent" >
 
     <ImageButton
         android:id="@+id/circle.button.share"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:scaleType="fitXY"
         android:text="share"
         android:src="@mipmap/share"
-        android:focusable="true" />
+        android:focusable="true"
+        style="?android:attr/borderlessButtonStyle"/>
 </com.nookdev.githubreader.Views.CircleLayout>
 
     <ImageView
@@ -71,7 +77,8 @@ android:layout_height="match_parent" >
         android:layout_gravity="center"
         android:src="@mipmap/launcher"
         android:minHeight="120dp"
-        android:minWidth="120dp" />
+        android:minWidth="120dp"
+        style="?android:attr/borderlessButtonStyle"/>
 
 
 </FrameLayout>
