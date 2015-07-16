@@ -1,17 +1,14 @@
 package com.nookdev.githubreader.Fragments;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Fragment;
-
 
 import com.nookdev.githubreader.Activities.DetailsActivity;
 import com.nookdev.githubreader.Activities.MainActivity;
-import com.nookdev.githubreader.Database.Database;
 import com.nookdev.githubreader.Models.Profile;
-import com.nookdev.githubreader.Models.Repository;
 
 import org.kohsuke.github.GHUser;
 import org.kohsuke.github.GitHub;
@@ -100,12 +97,7 @@ public class RetainFragment extends Fragment{
             String query = params[0];
             try {
                 //TODO добавить авторизацию и убрать свой логин
-
-
                 GitHub gitHub = GitHub.connectAnonymously();
-
-
-
 
                 try {
                     GHUser ghUser = gitHub.getUser(query);
