@@ -1,5 +1,10 @@
 package com.nookdev.githubreader.Models;
 
+import org.kohsuke.github.GHRepository;
+
+import java.util.ArrayList;
+import java.util.Map;
+
 public class Repository {
 
     public static final String PARCEL_REPO_NAME_TAG = "nm";
@@ -27,6 +32,23 @@ public class Repository {
         this.language = _language;
         this.forks = _forks;
         this.stars = _stars;
+    }
+    public static ArrayList<Repository> getRepositoriesArray(Map<String,GHRepository> repositoryMap){
+        ArrayList<Repository> result = new ArrayList<Repository>();
+        for (Map.Entry<String,GHRepository> entry : repositoryMap.entrySet()){
+            GHRepository data = entry.getValue();
+            result.add(
+                    new Repository(
+                            data.getName(),
+                            data.getLanguage(),
+                            data.getForks(),
+                            data.getWatchers()
+                    )
+            );
+        }
+
+        return result;
+
     }
 
     public Repository(String _name, String _language, int _forks, int _stars, boolean _forked,boolean _starred) {

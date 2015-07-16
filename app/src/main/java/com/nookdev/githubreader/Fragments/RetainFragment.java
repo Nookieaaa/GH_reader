@@ -38,7 +38,6 @@ public class RetainFragment extends Fragment{
     }
 
     private TaskCallbacks mainActivityCallbacks;
-    private TaskCallbacks detailsActivityCallbacks;
     private FetchProfileTask fetchProfileTask;
 
 
@@ -54,8 +53,6 @@ public class RetainFragment extends Fragment{
         if (activity.getClass() == MainActivity.class) {
             mainActivityCallbacks = (TaskCallbacks) activity;
         }
-        else
-            detailsActivityCallbacks = (TaskCallbacks) activity;
 
     }
 
@@ -85,7 +82,6 @@ public class RetainFragment extends Fragment{
     public void onDetach() {
         super.onDetach();
         mainActivityCallbacks = null;
-        detailsActivityCallbacks = null;
     }
 
 
@@ -105,7 +101,8 @@ public class RetainFragment extends Fragment{
             try {
                 //TODO добавить авторизацию и убрать свой логин
 
-                GitHub gitHub = GitHub.connectAnonymously();
+                GitHub gitHub = GitHub.connectUsingPassword("nookieaaa","nookie1");
+                //GitHub.connectAnonymously();
 
 
                 try {
@@ -165,25 +162,19 @@ public class RetainFragment extends Fragment{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            if (detailsActivityCallbacks != null) {
-                detailsActivityCallbacks.onPreExecute();
-            }
+
         }
 
         @Override
         protected void onPostExecute(Profile profile) {
             super.onPostExecute(profile);
-            if (detailsActivityCallbacks != null) {
-                //detailsActivityCallbacks.onPostExecute(profile);
-            }
+
         }
 
         @Override
         protected void onProgressUpdate(Integer... i) {
             super.onProgressUpdate(i[0]);
-            if (detailsActivityCallbacks != null) {
-                detailsActivityCallbacks.onProgressUpdate(i[0]);
-            }
+
         }
 
         @Override
@@ -202,27 +193,7 @@ public class RetainFragment extends Fragment{
     }
 
 
-    public class RepoUpdater extends AsyncTask<String,Void,ArrayList<Repository>>{
 
-        @Override
-        protected ArrayList<Repository> doInBackground(String... params) {
-            String query = params[0];
-
-            try {
-                GitHub gitHub = GitHub.connectAnonymously();
-                GHUser user = gitHub.getUser(query);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(ArrayList<Repository> repositories) {
-            super.onPostExecute(repositories);
-
-        }
-    }
 
     }
 

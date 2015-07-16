@@ -13,19 +13,25 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.nookdev.githubreader.Adapters.RepoListAdapter;
 import com.nookdev.githubreader.Models.Profile;
 import com.nookdev.githubreader.Models.Repository;
 import com.nookdev.githubreader.R;
 
+import org.kohsuke.github.GHUser;
+import org.kohsuke.github.GitHub;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 
-public class RepoListFragment extends SwipeRefreshListFragment implements RetainFragment.RepoTaskCallbacks {
+public class RepoListFragment extends SwipeRefreshListFragment {
     View mheaderView;
+    private Profile profile;
     private ArrayList<Repository> data;
 
     @Override
@@ -37,7 +43,7 @@ public class RepoListFragment extends SwipeRefreshListFragment implements Retain
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        Profile profile = getActivity().getIntent().getParcelableExtra(Profile.PROFILE_TAG);
+        profile = getActivity().getIntent().getParcelableExtra(Profile.PROFILE_TAG);
         if (profile!=null){
             data = (ArrayList)profile.repositories;
         }
@@ -95,56 +101,45 @@ public class RepoListFragment extends SwipeRefreshListFragment implements Retain
 
     private void initiateRefresh() {
 
-        new DummyBackgroundTask().execute();
+        new RepoUpdater().execute(profile.username);
     }
 
-    private void onRefreshComplete(List<String> result) {
+    private void onRefreshComplete(List<Repository> result) {
 
-        /*ArrayAdapter<String> adapter = (ArrayAdapter<String>) getListAdapter();
-        adapter.clear();
-        for (String cheese : result) {
-            adapter.add(cheese);
-        }*/
+        data.clear();
+        data.addAll(result);
 
+        RepoListAdapter adapter = (RepoListAdapter)getListAdapter();
+        adapter.notifyDataSetChanged();
 
         setRefreshing(false);
     }
 
-    @Override
-    public void onPostExecute(ArrayList data) {
-
-    }
 
 
-    private class DummyBackgroundTask extends AsyncTask<Void, Void, List<String>> {
-
-        static final int TASK_DURATION = 3 * 1000; // 3 seconds
+    public class RepoUpdater extends AsyncTask<String,Void,ArrayList<Repository>>{
 
         @Override
-        protected List<String> doInBackground(Void... params) {
+        protected ArrayList<Repository> doInBackground(String... params) {
+            String query = params[0];
+
             try {
-                Thread.sleep(TASK_DURATION);
-            } catch (InterruptedException e) {
+                GitHub gitHub = GitHub.connectAnonymously();
+                GHUser user = gitHub.getUser(query);
+                ArrayList<Repository> result = Repository.getRepositoriesArray(user.getRepositories());
+                return result;
+            } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            String[] s = {"1","2","3","4","5","6","7","8","9","10"};
-
-            return Arrays.asList(s);
+            return null;
         }
 
         @Override
-        protected void onPostExecute(List<String> result) {
-            super.onPostExecute(result);
-
-            onRefreshComplete(result);
+        protected void onPostExecute(ArrayList<Repository> repositories) {
+            super.onPostExecute(repositories);
+            onRefreshComplete(repositories);
         }
-
+    }
     }
 
     //adapter
-
-
-
-
-}

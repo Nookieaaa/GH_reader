@@ -72,8 +72,8 @@ public class DetailsActivity extends AppCompatActivity implements CircleLayout.C
     @Override
     public void changeAvatarParams(int radius) {
         ImageView iv = (ImageView)findViewById(R.id.avatar);
-        iv.getLayoutParams().height = (int)(radius*3.5);
-        iv.getLayoutParams().width = (int)(radius*3.5);
+        iv.getLayoutParams().height = (int)(radius*3.7);
+        iv.getLayoutParams().width = (int)(radius*3.7);
         iv.requestLayout();
     }
 }
