@@ -21,6 +21,9 @@
     <string name="title_activity_details" translatable="false">Github Reader</string>
     <string name="hello_world" translatable="false">Hello world!</string>
     <string name="details_username_company" translatable="false">%s : %s</string>
+    <string name="db_message_added">Succesfully saved in database</string>
+    <string name="db_message_updated">Updated existing record</string>
+    <string name="db_message_error">Error, record wasn`t added</string>
 
 
 </resources>

@@ -14,7 +14,7 @@ android:layout_height="match_parent" >
         android:layout_height="30dp"
         android:scaleType="fitXY"
         android:text="save"
-        android:src="@mipmap/save"
+        android:src="@drawable/save_as"
         android:focusable="true"
         style="?android:attr/borderlessButtonStyle"/>
 
@@ -23,7 +23,7 @@ android:layout_height="match_parent" >
         android:layout_width="40dp"
         android:layout_height="30dp"
         android:text="browse"
-        android:src="@mipmap/browse"
+        android:src="@drawable/browse"
         android:focusable="true"
         android:scaleType="fitXY"
         style="?android:attr/borderlessButtonStyle"/>
@@ -65,7 +65,7 @@ android:layout_height="match_parent" >
         android:layout_height="30dp"
         android:scaleType="fitXY"
         android:text="share"
-        android:src="@mipmap/share"
+        android:src="@drawable/share"
         android:focusable="true"
         style="?android:attr/borderlessButtonStyle"/>
 </com.nookdev.githubreader.Views.CircleLayout>

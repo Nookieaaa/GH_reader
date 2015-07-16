@@ -50,10 +50,11 @@
             />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/repolist.row.starsection.forkimage"
-            android:src="@android:drawable/ic_menu_directions"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/fork"
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@+id/repolist.row.starsection.stars"
             android:layout_toStartOf="@+id/repolist.row.starsection.stars"
@@ -74,10 +75,11 @@
             android:layout_centerVertical="true" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+
             android:id="@+id/repolist.row.starsection.starimage"
-            android:src="@android:drawable/btn_star_big_off"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@android:drawable/star_big_off"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"

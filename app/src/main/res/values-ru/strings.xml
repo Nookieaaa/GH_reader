@@ -15,4 +15,7 @@
     <string name="username_hint">Имя пользователя GitHub</string>
     <string name="welcome_text">Введите имя пользователя, чтобы узнать больше</string>
     <string name="repolist_header">Репозитории:</string>
+    <string name="db_message_added">Успешно сохранено в локальной базе</string>
+    <string name="db_message_error">Ошибка, запись не добавлена</string>
+    <string name="db_message_updated">Обновлена существующая запись</string>
 </resources>

@@ -7,8 +7,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.nookdev.githubreader.Fragments.SwipeRefreshListFragment;
@@ -21,10 +24,12 @@ import java.util.ArrayList;
 public class RepoListAdapter extends BaseAdapter implements View.OnClickListener {
 
     /*********** Declare Used Variables *********/
+    public Resources res;
+
     private FragmentActivity listFragment;
     private ArrayList data;
     private static LayoutInflater inflater;
-    public Resources res;
+    private ListView listView;
     Repository repository;
     int i=0;
 
@@ -66,6 +71,8 @@ public class RepoListAdapter extends BaseAdapter implements View.OnClickListener
         public TextView language;
         public TextView stars_count;
         public TextView forks_count;
+        public ImageView forks_image;
+        public ImageView stars_image;
 
     }
 
@@ -87,10 +94,12 @@ public class RepoListAdapter extends BaseAdapter implements View.OnClickListener
             holder.language=(TextView)v.findViewById(R.id.repolist_row_infoblock_language);
             holder.forks_count=(TextView)v.findViewById(R.id.repolist_row_starsection_forks);
             holder.stars_count=(TextView)v.findViewById(R.id.repolist_row_starsection_stars);
+            holder.forks_image = (ImageView)v.findViewById(R.id.repolist_row_starsection_forkimage);
+            holder.stars_image = (ImageView)v.findViewById(R.id.repolist_row_starsection_starimage);
             //holder.image=(ImageView)v.findViewById(R.id.image);
 
             /************  Set holder with LayoutInflater ************/
-            v.setTag( holder );
+
         }
         else
             holder=(ViewHolder)v.getTag();
@@ -107,31 +116,83 @@ public class RepoListAdapter extends BaseAdapter implements View.OnClickListener
 
             /************  Set Model values in Holder elements ***********/
 
-            holder.name.setText( repository.name );
+
+
+            holder.name.setText(repository.name );
             holder.language.setText(String.format(listFragment.getApplicationContext().getString(R.string.repository_list_language), repository.language));
             holder.stars_count.setText(String.valueOf(repository.stars));
             holder.forks_count.setText(String.valueOf(repository.forks));
+            holder.stars_image.setOnClickListener(this);
+            holder.forks_image.setOnClickListener(this);
 
-
-
-            /*holder.image.setImageResource(
-                    res.getIdentifier(
-                            "com.androidexample.customlistview:drawable/"+tempValues.getImage()
-                            ,null,null));*/
-
-            /******** Set Item Click Listner for LayoutInflater for each row *******/
-
-            v.setOnClickListener(new OnItemClickListener( position ));
         }
+
+        v.setTag( holder );
+
         return v;
     }
 
+    //dummy actions :(
     @Override
     public void onClick(View v) {
-        Log.v("CustomAdapter", "=====Row button clicked=====");
+        if (listFragment!=null){
+            res = listFragment.getResources();
+        }
+        View parentView = (View) v.getParent(); //getting section
+        ListView listView = (ListView) parentView.getParent().getParent();//getting row
+        final int position = listView.getPositionForView(parentView);
+        ImageView iv = (ImageView)v;
+        switch (v.getId()){
+            case R.id.repolist_row_starsection_starimage:{
+                TextView stars = (TextView)parentView.findViewById(R.id.repolist_row_starsection_stars);
+                int curValue = Integer.parseInt(stars.getText().toString());
+                if (iv.getDrawable().getConstantState() == res.getDrawable(android.R.drawable.star_big_off).getConstantState())
+                {
+                    iv.setImageResource(android.R.drawable.star_big_on);
+                    stars.setText(String.valueOf(curValue + 1));
+                }
+                else{
+                    iv.setImageResource(android.R.drawable.star_big_off);
+                    stars.setText(String.valueOf(curValue - 1));
+                }
+
+                break;
+            }
+            case R.id.repolist_row_starsection_forkimage:{
+                TextView forks = (TextView)parentView.findViewById(R.id.repolist_row_starsection_forks);
+                int curValue = Integer.parseInt(forks.getText().toString());
+                if (iv.getDrawable().getConstantState() == res.getDrawable(R.drawable.fork).getConstantState())
+                {
+                    iv.setImageResource(R.drawable.forked);
+                    forks.setText(String.valueOf(curValue + 1));
+                }
+                else{
+                    iv.setImageResource(R.drawable.fork);
+                    forks.setText(String.valueOf(curValue - 1));
+                }
+                break;
+            }
+        }
+
+
     }
 
-    /********* Called when Item click in ListView ************/
+
+
+    private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            View parentRow = (View) view.getParent();
+            ListView listView = (ListView) parentRow.getParent();
+            //final int position = listView.getPositionForView(parentRow);
+
+
+        }
+
+    };
+
+
+    /********* Called when Item click in ListView ************//*
     private class OnItemClickListener  implements View.OnClickListener {
         private int mPosition;
 
@@ -143,11 +204,11 @@ public class RepoListAdapter extends BaseAdapter implements View.OnClickListener
         public void onClick(View arg0) {
 
 
-            FragmentActivity sct = listFragment;
+            int i=0;
 
-            /****  Call  onItemClick Method inside CustomListViewAndroidExample Class ( See Below )****/
+            *//****  Call  onItemClick Method inside CustomListViewAndroidExample Class ( See Below )****//*
 
            // sct.onItemClick(mPosition);
         }
-    }
+    }*/
 }

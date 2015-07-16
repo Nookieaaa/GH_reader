@@ -63,16 +63,32 @@ public class PersonalInfoFragment extends Fragment {
                 switch (v.getId()){
                     case R.id.circle_button_save:{
                         Database db= new Database(getActivity());
-                        if(db.add(profile)==-1){
-                            Toast.makeText(getActivity(),"ERROR",Toast.LENGTH_SHORT).show();
-                        }
-                        else{
-                            Toast.makeText(getActivity(),"SUCCESS",Toast.LENGTH_SHORT).show();
+                        int result = db.add(profile);
+                        String message;
+                        switch (result){
+                            case Database.DB_STATUS_ERROR:{
+                                message = getString(R.string.db_message_error);
+                                break;
+                            }
+                            case Database.DB_STATUS_ADDED:{
+                                message = getString(R.string.db_message_added);
+                                break;
+                            }
+                            case Database.DB_STATUS_UPDATED:{
+                                message = getString(R.string.db_message_updated);
+                                break;
+                            }
+                            default:
+                                message="";
                         }
 
-                        break;
+                        if(message.length()!=0)
+                            Toast.makeText(getActivity(),message,Toast.LENGTH_SHORT).show();
+
                     }
+                    break;
                     case R.id.circle_button_share:{
+
 
                         break;
                     }
