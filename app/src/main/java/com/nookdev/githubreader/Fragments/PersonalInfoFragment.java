@@ -1,6 +1,9 @@
 package com.nookdev.githubreader.Fragments;
 
 import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,11 +12,14 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.nookdev.githubreader.Database.Database;
 import com.nookdev.githubreader.R;
 import com.nookdev.githubreader.Utils.ImageLoader;
 import com.nookdev.githubreader.Models.Profile;
-import com.nookdev.githubreader.Views.CircleLayout;
+
+import org.kohsuke.github.GitHub;
 
 
 public class PersonalInfoFragment extends Fragment {
@@ -38,15 +44,53 @@ public class PersonalInfoFragment extends Fragment {
 
         following = (TextView)rootView.findViewById(R.id.circle_text_following);
         followers = (TextView)rootView.findViewById(R.id.circle_text_followers);
+        browseButton = (ImageButton)rootView.findViewById(R.id.circle_button_browse);
+        shareButton = (ImageButton)rootView.findViewById(R.id.circle_button_share);
+        saveButton = (ImageButton)rootView.findViewById(R.id.circle_button_save);
         usernaneCompany = (TextView)rootView.findViewById(R.id.circle_text_username_company);
 
-
         profile = getActivity().getIntent().getParcelableExtra(Profile.PROFILE_TAG);
-
         following.setText(String.format(getString(R.string.details_following),String.valueOf(profile.following)));
-        followers.setText(String.format(getString(R.string.details_followers),String.valueOf(profile.followers)));
-        usernaneCompany.setText(String.format(getString(R.string.details_username_company),profile.username,profile.company));
+        followers.setText(String.format(getString(R.string.details_followers), String.valueOf(profile.followers)));
+        usernaneCompany.setText(String.format(getString(R.string.details_username_company), profile.username, profile.company));
 
+        View.OnClickListener buttonListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                PackageManager pm = getActivity().getPackageManager();
+
+                switch (v.getId()){
+                    case R.id.circle_button_save:{
+                        Database db= new Database(getActivity());
+                        if(db.add(profile)==-1){
+                            Toast.makeText(getActivity(),"ERROR",Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Toast.makeText(getActivity(),"SUCCESS",Toast.LENGTH_SHORT).show();
+                        }
+
+                        break;
+                    }
+                    case R.id.circle_button_share:{
+
+                        break;
+                    }
+                    case R.id.circle_button_browse:{
+                        Intent browseIntent = new Intent(Intent.ACTION_VIEW,
+                                profile.html_adress);
+                        ComponentName componentName = browseIntent.resolveActivity(pm);
+                        if (componentName != null) {
+                            getActivity().startActivity(browseIntent);
+                        }
+                    }
+                }
+            }
+        };
+
+        shareButton.setOnClickListener(buttonListener);
+        saveButton.setOnClickListener(buttonListener);
+        browseButton.setOnClickListener(buttonListener);
 
         int loader = R.drawable.notification_template_icon_bg;
 
@@ -61,6 +105,9 @@ public class PersonalInfoFragment extends Fragment {
 
 
         imgLoader.DisplayImage(image_url, loader, image);
+
+
+
 
         return rootView;
     }

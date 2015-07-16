@@ -28,6 +28,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.nookdev.githubreader.Activities.DetailsActivity;
 import com.nookdev.githubreader.R;
 
 public class CircleLayout extends ViewGroup {
@@ -73,7 +74,8 @@ public class CircleLayout extends ViewGroup {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        circleCallbacks = (CircleCallbacks)getContext();
+        if (getContext().getClass() == DetailsActivity.class)
+            circleCallbacks = (CircleCallbacks)getContext();
 
     }
 
@@ -263,7 +265,7 @@ public class CircleLayout extends ViewGroup {
         final float minDimen = width > height ? height : width;
         final float radius = (minDimen - mInnerRadius)/2f;
 
-        changeAvatarParams((int) mInnerRadius);
+        changeAvatarParams(mInnerRadius);
 
         mBounds.set(width / 2 - minDimen / 2, height / 2 - minDimen / 2, width / 2 + minDimen / 2, height / 2 + minDimen / 2);
 

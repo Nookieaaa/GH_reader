@@ -15,15 +15,17 @@ public class DBOpenHelper extends SQLiteOpenHelper implements BaseColumns {
     public static final String COLUMN_COMPANY = "company";
     public static final String COLUMN_FOLLOWERS = "followers";
     public static final String COLUMN_FOLLOWING = "following";
+    public static final String COLUMN_ADRESS = "adress";
 
     private static final String DATABASE_NAME = "GitHubReader";
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_CREATE = "CREATE TABLE "+ TABLE_USERS +
+    private static final String DATABASE_CREATE = "CREATE TABLE "+ TABLE_USERS +"("+
             _ID+" integer primary key autoincrement, "+
-            COLUMN_USERNAME + " text not null, "+
-            COLUMN_COMPANY + " text, "+
-            COLUMN_FOLLOWERS + " integer, " +
-            COLUMN_FOLLOWING + " integer";
+            COLUMN_USERNAME + " TEXT not null, "+
+            COLUMN_COMPANY + " TEXT, "+
+            COLUMN_ADRESS + " TEXT, "+
+            COLUMN_FOLLOWERS + " INTEGER, " +
+            COLUMN_FOLLOWING + " INTEGER);";
 
     public DBOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

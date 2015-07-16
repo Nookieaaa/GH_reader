@@ -36,6 +36,7 @@ public class Profile implements Parcelable{
     public int followers;
     public int following;
     public Uri avatarURI;
+    public Uri html_adress;
     public List<Repository> repositories;
 
     public static final Parcelable.Creator<Profile> CREATOR = new Parcelable.Creator<Profile>() {
@@ -59,6 +60,7 @@ public class Profile implements Parcelable{
         this.following = _user.getFollowingCount();
         this.followers = _user.getFollowersCount();
         this.avatarURI = Uri.parse(_user.getAvatarUrl().toString());
+        this.html_adress = Uri.parse(_user.getHtmlUrl().toString());
         repositories = new ArrayList<Repository>();
         Map<String,GHRepository> repositoryMap = _user.getRepositories();
         for (Map.Entry<String,GHRepository> entry : repositoryMap.entrySet()){
@@ -74,11 +76,15 @@ public class Profile implements Parcelable{
         }
     }
 
-    public Profile(String _name, String _company, int _followers, int _following, String _avatar){
+    public Profile(String _name, String _company, int _followers, int _following, String _avatar, String _url){
         this.username = _name;
         this.company = _company;
         this.followers = _followers;
         this.following = _following;
+
+        if (_url!=null){
+            this.html_adress = Uri.parse(_url);
+        }
 
         if(_avatar!=null){
             avatarURI = Uri.parse(_avatar);
@@ -86,7 +92,7 @@ public class Profile implements Parcelable{
     }
 
     public Profile(Parcel parcel) {
-       String[] data = new String[6];
+       String[] data = new String[7];
         parcel.readStringArray(data);
 
         this.username = data[0];
@@ -94,8 +100,9 @@ public class Profile implements Parcelable{
         this.following = Integer.parseInt(data[2]);
         this.followers = Integer.parseInt(data[3]);
         this.avatarURI = Uri.parse(data[4]);
+        this.html_adress = Uri.parse(data[5]);
 
-        this.repositories = unpackReposFromParcel(data[5]);
+        this.repositories = unpackReposFromParcel(data[6]);
     }
 
 
@@ -116,6 +123,7 @@ public class Profile implements Parcelable{
                         String.valueOf(this.following),
                         String.valueOf(this.followers),
                         this.avatarURI.toString(),
+                        this.html_adress.toString(),
                         wrapReposToParcel()
                 }
         );
