@@ -96,8 +96,9 @@ public class RetainFragment extends Fragment{
         protected Intent doInBackground(String... params) {
             String query = params[0];
             try {
-                //TODO добавить авторизацию и убрать свой логин
-                GitHub gitHub = GitHub.connectAnonymously();
+
+                //GitHub gitHub = GitHub.connectAnonymously();
+                GitHub gitHub = GitHub.connectUsingPassword("nookieaaa","nookie1");
 
                 try {
                     GHUser ghUser = gitHub.getUser(query);
@@ -119,8 +120,8 @@ public class RetainFragment extends Fragment{
             return null;
         }
 
-        private ArrayList<String> makeStringListFromGHUserList(AbstractList<GHUser> ghUserList) {
-            ArrayList<String> result= new ArrayList<String>(ghUserList.size());
+        private ArrayList makeStringListFromGHUserList(AbstractList<GHUser> ghUserList) {
+            ArrayList<String> result= new ArrayList(ghUserList.size());
             for (GHUser user : ghUserList){
                 result.add(user.getLogin());
             }

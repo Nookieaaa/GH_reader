@@ -170,12 +170,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onCancelled() {
-        Toast.makeText(this,"Отмена",Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onPostExecute(Intent intent) {
-        Toast.makeText(this,"Готово",Toast.LENGTH_SHORT).show();
         dismissProgressDialog();
 
         startActivity(intent);

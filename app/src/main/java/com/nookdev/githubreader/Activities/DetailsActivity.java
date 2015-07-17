@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import com.facebook.FacebookSdk;
 import com.nookdev.githubreader.Fragments.PersonalInfoFragment;
 import com.nookdev.githubreader.Fragments.RepoListFragment;
 import com.nookdev.githubreader.Models.Profile;
@@ -26,6 +27,8 @@ public class DetailsActivity extends AppCompatActivity implements CircleLayout.C
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
+
+        FacebookSdk.sdkInitialize(getApplicationContext());
 
 
         ActionBar actionBar = getSupportActionBar();

@@ -37,7 +37,8 @@ android:layout_height="match_parent" >
         android:textSize="12sp"
         android:textAlignment="center"
         android:gravity="center_horizontal"
-        android:elegantTextHeight="true" />
+        android:elegantTextHeight="true"
+        style="@style/standartTextView" />
 
     <TextView
         android:id="@+id/circle.text.username.company"
@@ -46,7 +47,8 @@ android:layout_height="match_parent" >
         android:text="@string/details_username_company"
         android:singleLine="true"
         android:elegantTextHeight="true"
-        android:gravity="center_horizontal|bottom" />
+        android:gravity="center_horizontal|bottom"
+        style="@style/boldTextView" />
 
     <TextView
         android:id="@+id/circle.text.following"
@@ -57,7 +59,8 @@ android:layout_height="match_parent" >
         android:textSize="12sp"
         android:textAlignment="center"
         android:gravity="center_horizontal"
-        android:elegantTextHeight="true" />
+        android:elegantTextHeight="true"
+        style="@style/standartTextView" />
 
     <ImageButton
         android:id="@+id/circle.button.share"

@@ -1,9 +1,13 @@
 package com.nookdev.githubreader.Fragments;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,6 +24,8 @@ import com.nookdev.githubreader.Utils.ImageLoader;
 import com.nookdev.githubreader.Models.Profile;
 
 import org.kohsuke.github.GitHub;
+
+import java.util.List;
 
 
 public class PersonalInfoFragment extends Fragment {
@@ -54,10 +60,11 @@ public class PersonalInfoFragment extends Fragment {
         followers.setText(String.format(getString(R.string.details_followers), String.valueOf(profile.followers)));
         usernaneCompany.setText(String.format(getString(R.string.details_username_company), profile.username, profile.company));
 
+
         View.OnClickListener buttonListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //заплатка вместо работы с api /// восстанавливаю
                 PackageManager pm = getActivity().getPackageManager();
 
                 switch (v.getId()){
@@ -88,7 +95,49 @@ public class PersonalInfoFragment extends Fragment {
                     }
                     break;
                     case R.id.circle_button_share:{
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        final Resources resources = getResources();
+                        builder.setTitle(resources.getString(R.string.share_title));
 
+                        final CharSequence[] items = {
+                                resources.getString(R.string.google_plus_share),
+                                resources.getString(R.string.facebook_share),
+                                resources.getString(R.string.twitter_share)};
+                        builder.setItems(items, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int item) {
+                                switch(item){
+                                    case 0:{
+                                        //google
+
+                                        break;
+                                    }
+                                    case 1:{
+                                        //fb
+                                        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                                        String shareBody = " Check out this guy: "+profile.html_adress;
+                                        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                                        PackageManager pm = getActivity().getPackageManager();
+                                        List<ResolveInfo> activityList = pm.queryIntentActivities(sharingIntent, 0);
+                                        for(final ResolveInfo app : activityList) {
+                                            if("com.facebook.katana.ShareLinkActivity".equals(app.activityInfo.name)) {
+                                                startActivity(Intent.createChooser(sharingIntent, "Share idea"));
+                                                break;
+                                            } else {
+                                                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, resources.getString(R.string.app_name));
+                                                startActivity(Intent.createChooser(sharingIntent, resources.getString(R.string.share_title)));
+                                                break;
+                                            }
+                                        }
+                                        break;
+                                    }
+                                    case 2:{
+                                        //twitter
+
+                                        break;
+                                    }
+                                }
+                            }
+                        }).show();
 
                         break;
                     }

@@ -11,21 +11,28 @@
     <RelativeLayout
         android:id="@+id/repolist.row.infoblock"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:layout_weight="60">
+        android:layout_height="wrap_content" android:layout_weight="60"
+        style="@style/standartTextView">
 
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="name"
-            android:id="@+id/repolist.row.infoblock.name" />
+            android:id="@+id/repolist.row.infoblock.name"
+            android:typeface="sans"
+            android:textStyle="italic"
+            style="@style/boldTextView" />
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/repolist.row.infoblock.name"
             android:text="@string/repository_list_language"
-            android:id="@+id/repolist.row.infoblock.language" />
+            android:id="@+id/repolist.row.infoblock.language"
+            android:typeface="sans"
+            android:textStyle="italic"
+            style="@style/standartTextView" />
     </RelativeLayout>
 
 
@@ -47,7 +54,9 @@
             android:gravity="fill_horizontal|center_vertical|fill_vertical"
             android:elegantTextHeight="true"
             android:layout_centerVertical="true"
-            />
+            android:typeface="sans"
+            android:textStyle="italic"
+            style="@style/standartTextView" />
 
         <ImageView
             android:id="@+id/repolist.row.starsection.forkimage"
@@ -72,7 +81,10 @@
             android:layout_toStartOf="@+id/repolist.row.starsection.starimage"
             android:gravity="fill_horizontal|center_vertical|fill_vertical"
             android:elegantTextHeight="true"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"
+            android:typeface="sans"
+            android:textStyle="italic"
+            style="@style/standartTextView" />
 
         <ImageView
 

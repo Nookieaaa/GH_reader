@@ -25,5 +25,10 @@
     <string name="db_message_updated">Updated existing record</string>
     <string name="db_message_error">Error, record wasn`t added</string>
 
+    <string name="facebook_app_id" translatable = "false">1597532846</string>
+    <string name="facebook_share" translatable = "false">Facebook</string>
+    <string name="google_plus_share" translatable = "false">Google +</string>
+    <string name="twitter_share" translatable = "false">Twitter</string>
+    <string name="share_title">Share on</string>
 
 </resources>

@@ -18,4 +18,6 @@
     <string name="db_message_added">Успешно сохранено в локальной базе</string>
     <string name="db_message_error">Ошибка, запись не добавлена</string>
     <string name="db_message_updated">Обновлена существующая запись</string>
+    <string name="title_activity_detail" translatable="false"></string>
+    <string name="share_title">Поделиться</string>
 </resources>

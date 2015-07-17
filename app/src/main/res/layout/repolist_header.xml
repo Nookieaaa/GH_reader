@@ -8,5 +8,7 @@
         android:layout_height="wrap_content"
         android:text="@string/repository_list_header_label"
         android:id="@+id/textView2"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:textStyle="italic"
+        android:typeface="sans" />
 </LinearLayout>
